@@ -7,27 +7,46 @@ We will be using the above example with an input layer, 1 hidden layer & 1 outpu
 Let's understand the nomeclature first:
 
 i1, i2 -> Input Neurons
+
 h1,h2 -> Nuerons in the hidden layer
+
 a_h1, a_h2 -> Neurons in the hidden layer post the activation -> Also called activated hidden layer neurons -> In this example, we are using the Sigmoid Activation function
+
 o1, o2 -> Output layer neurons
+
 a_o1, a_o2 -> Activated output layer neurons
+
 t1, t2 -> 2 Targets -> These are the ideal desired output values from the neural network
+
 E1 -> Loss of the first ouput a_o1 as compared to the first target t1 -> In this example, we are computing the mean squared error
+
 E2 -> Loss of the second ouput a_o2 as compared to the second target t2
+
 E_Total -> Total Loss -> Used to determine model accuracy = E1+E2
+
 w1,w2,w3...w8 -> Weights of the neural network connecting subsequent layers. These get updated after every epoch.
 
 From the above image, A few equations can be derived based on the basic neural network architecture
 h1 = w1*i1 + w2*i2		
+
 h2 = w3*i1 + w4*i2		
+
 a_h1 = σ(h1) = 1/(1 + exp(-h1))	-> Formula for Sigmoid
+
 a_h2 = σ(h2)		
+
 o1 = w5*a_h1 + w6*a_h2		
+
 o2 = w7*a_h1 + w8*a_h2		
+
 a_o1 = σ(o1)		
+
 a_o2 = σ(o2)		
+
 E_total = E1 + E2		
+
 E1 = ½ * (t1 - a_o1)²		-> Formula for MSE
+
 E2 = ½ * (t2 - a_o2)²		
 
 Now, The Objective of backpropogation is to arrive at the final weights w1,w2 ... w8 as soon as possible so that the total loss (E_total) is miminum. To find this, the weights w1 ... w8 get updated using the below formula:
@@ -48,6 +67,7 @@ Now using the chain rule in differentiation,
 ðE_total/ ðw5  = ðE1/ðw5 = (ðE1/ða_o1) * (ða_o1/ðo1) * (ðo1/ðw5)
 
 ðE_total/ ðw5  = ðE1/ðw5 = (∂(½ * (t1 - a_o1)²)/∂a_o1) * (∂(σ(o1))/∂o1) * (a_h1)
+
 **ðE_total/ ðw5  = ðE1/ðw5 = (a_01 - t1) * (a_o1 * (1 - a_o1)) * (a_h1)
 
 Similarly, We can compute the other partial differentiations too using chain rule:
